@@ -1,2 +1,2 @@
-# Sick_af_code
+# Sicko_Code
 MAE 384 Group Project
