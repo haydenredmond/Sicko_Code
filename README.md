@@ -12,4 +12,8 @@ Function Files:
     - EL2 Error
 
     Part 3:
-    -test
+    - Linear Least Squares
+
+    Part 4:
+    - Periodic SIR Model
+    - Fast Fourier Transform
