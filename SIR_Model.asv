@@ -4,7 +4,7 @@ function [S,I,R] = SIR_Solver(Initial_Susceptible,Initial_Infected,Initial_Recov
     Time = 0:Time_Step:Sim_Time;
     N = Sim_Time / Time_Step;
 
-    Solution = zeros(length(Time),3);
+    Solution = zeros(length(Time,3));
     Solution(1,:) = Initial_Counts;
     
     SIR_System = @(Time,Solution_Array) [
@@ -21,9 +21,8 @@ function [S,I,R] = SIR_Solver(Initial_Susceptible,Initial_Infected,Initial_Recov
         k3 = SIR_System(Time(i) + (Time_Step / 2), Solution_Transposed + (k2 / 2)) * Time_Step;
         k4 = SIR_System(Time(i) + Time_Step, Solution_Transposed + k3) * Time_Step;
 
-        Solution(i+1,:) = (Solution_Transposed + (k1 + 2*k2 + 2*k3 + k4) / 6)';
+        Solution(i+1,:) = (1/6) * (Solution_Transposed + (k1 ))
     end
-    S = Solution(:,1);
-    I = Solution(:,2);
-    R = Solution(:,3);
+
+   
 end
