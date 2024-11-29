@@ -1,4 +1,4 @@
-function [S,I,R] = SIR_Solver(Initial_Susceptible,Initial_Infected,Initial_Recovered,Sim_Time,Time_Step,Tran_Rate,Recov_Rate)
+function [S,I,R] = SIR_Model(Initial_Susceptible,Initial_Infected,Initial_Recovered,Sim_Time,Time_Step,Tran_Rate,Recov_Rate)
 
     Initial_Counts = [Initial_Susceptible,Initial_Infected,Initial_Recovered];
     Time = 0:Time_Step:Sim_Time;
