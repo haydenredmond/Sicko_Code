@@ -2,7 +2,7 @@ function [S,I,R] = SIR_Model(Initial_Susceptible,Initial_Infected,Initial_Recove
 
     Initial_Counts = [Initial_Susceptible,Initial_Infected,Initial_Recovered];
     Time = 0:Time_Step:Sim_Time;
-    N = sum(Initial_Counts);
+    N = sum(Inital_Counts);
 
     Solution = zeros(length(Time),3);
     Solution(1,:) = Initial_Counts;
