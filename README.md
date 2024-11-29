@@ -30,7 +30,7 @@ SIR_Model(Initial_Susceptible,Initial_Infected,Initial_Recovered,Sim_Time,Time_S
     - Initial_Infected: Initial infected popluation, positive integer value
     - Initial_Recovered: Initial recovered population, positive integer value
     - Sim_Time: Number of days to run simulation, positive non-zero integer value
-    - Time_Step: Size of each time step, positive non-zero integer value
+    - Time_Step: Size of each time step in days, positive non-zero integer value
     - Tran_Rate: Rate of disease transmission, positive non-zero float value
     - Recov_Rate: Rate of recovery from disease, positive non-zero float value
 - Notes
