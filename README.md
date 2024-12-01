@@ -38,14 +38,22 @@ SIR_Model(Initial_Susceptible,Initial_Infected,Initial_Recovered,Sim_Time,Time_S
     - Additional arugment may be added (use for calling a specific index of Tran_Rate vector)
     - When plotting, independent axis must contain the same number of elements as the function invocation 
 
+LinearInterpolation(Susceptible,Infected,Recovered)
+- Output [S_Interp,I_Interp,R_Interp]
+    - S_Interp: Interpolated susceptible population data spliced with calculated data, array of dimensions 1x101
+    - I_Interp: Interpolated infected population data spliced with calculated data, array of dimensions 1x101
+    - R_Interp: Interpolated recovered population data spliced with calculated data, array of dimensions 1x101
+- Arguments
+    - Susceptible: Calculated susceptible population from SIR model w/ step size of 2 days, array of dimensions 51x1
+    - Infected: Calculated infected population from SIR model w/ step size of 2 days, array of dimensions 51x1
+    - Recovered: Calculated recovered population from SIR model w/ step size of 2 days, array of dimensions 51x1
 
 Periodic_SIR_Model(Initial_Susceptible,Initial_Infected,Initial_Recovered,Sim_Time,Time_Step,Recov_Rate,Initial_Transmission_Rate,Amplitude,Angular_Frequency)
-
 - Output [S,I,R,Time]
     - S:Susceptible population, one dimensional matrix of dimensions (Sim_Time,1)
-    - I:Infected population, one dimensional matrix of dimensions (Sim_Time,1)
+    - I: Infected population, one dimensional matrix of dimensions (Sim_Time,1)
     - R: Recovered population, one dimensional matrix of dimensions (Sim_Time,1)
-    - Time:Time vector used to plot the S,I,R outputs with, vector with length Sim_Time/ Time_Step
+    - Time: Time vector used to plot the S,I,R outputs with, vector with length Sim_Time/ Time_Step
 - Arguments
     - Initial_Susceptible: Initial susceptible population, positive integer value
     - Initial_Infected: Initial infected population, positive integer value
