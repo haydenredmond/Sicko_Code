@@ -69,7 +69,7 @@ Periodic_SIR_Model(Initial_Susceptible,Initial_Infected,Initial_Recovered,Sim_Ti
     - The primary changes include: Modifying the function to accept a vector input for the transmission rate, and the addition of a time vector to the output for use in plotting the outputs. 
 
 
-
+Test Ava
 
 
 
