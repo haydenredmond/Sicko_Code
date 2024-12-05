@@ -1,0 +1,83 @@
+% MATLAB Code for Part III: Least Squares
+function [ln_I] = Linear_Least_Squares(Initial_Susceptible,Initial_Infected,Initial_Recovered,Sim_Time,Time_Step,Tran_Rate,Recov_Rate)
+
+
+end
+
+%% Constants and Initial Conditions
+% N = 1000;                  
+% S0 = 990;                  
+% I0 = 10;                   
+% R0 = 0;                    
+% beta = 0.3;                
+% gamma = 0.1;              
+% h = 1;                    
+% T = 30;                    
+% t = 0:h:T;                
+% num_steps = length(t);
+
+%% Runge-Kutta 4th-order Method for SIR Model (Non-linear)
+S = zeros(1, num_steps);   % Susceptible 
+I = zeros(1, num_steps);   % Infected 
+R = zeros(1, num_steps);   % Recovered 
+
+
+S(1) = S0;
+I(1) = I0;
+R(1) = R0;
+
+
+for n = 1:num_steps-1
+   
+    dS1 = -beta * S(n) * I(n) / N;
+    dI1 = beta * S(n) * I(n) / N - gamma * I(n);
+    dR1 = gamma * I(n);
+
+    dS2 = -beta * (S(n) + 0.5 * h * dS1) * (I(n) + 0.5 * h * dI1) / N;
+    dI2 = beta * (S(n) + 0.5 * h * dS1) * (I(n) + 0.5 * h * dI1) / N - gamma * (I(n) + 0.5 * h * dI1);
+    dR2 = gamma * (I(n) + 0.5 * h * dI1);
+
+    dS3 = -beta * (S(n) + 0.5 * h * dS2) * (I(n) + 0.5 * h * dI2) / N;
+    dI3 = beta * (S(n) + 0.5 * h * dS2) * (I(n) + 0.5 * h * dI2) / N - gamma * (I(n) + 0.5 * h * dI2);
+    dR3 = gamma * (I(n) + 0.5 * h * dI2);
+
+    dS4 = -beta * (S(n) + h * dS3) * (I(n) + h * dI3) / N;
+    dI4 = beta * (S(n) + h * dS3) * (I(n) + h * dI3) / N - gamma * (I(n) + h * dI3);
+    dR4 = gamma * (I(n) + h * dI3);
+
+  
+    S(n+1) = S(n) + h * (dS1 + 2*dS2 + 2*dS3 + dS4) / 6;
+    I(n+1) = I(n) + h * (dI1 + 2*dI2 + 2*dI3 + dI4) / 6;
+    R(n+1) = R(n) + h * (dR1 + 2*dR2 + 2*dR3 + dR4) / 6;
+end
+
+%% Linear Least Squares
+ln_I = log(I(2:end)); 
+t_data = t(2:end);    
+
+
+X = [ones(length(t_data), 1), t_data'];
+theta = X \ ln_I';                     
+ln_I0_est = theta(1);                 
+k_est = theta(2);                      
+
+
+I0_est = exp(ln_I0_est);              
+beta_est = (N * (k_est + gamma)) / S0; 
+
+%% Results
+disp('Estimated Parameters:');
+fprintf('I(0) (Estimated): %.2f\n', I0_est);
+fprintf('k (Estimated): %.4f\n', k_est);
+fprintf('beta (Estimated): %.4f\n', beta_est);
+
+%% Plot Results
+figure;
+scatter(t_data, ln_I, 'co', 'DisplayName', 'True ln(I(t))');
+hold on;
+plot(t_data, X * theta, 'g-', 'LineWidth', 1.5, 'DisplayName', 'Fitted Line');
+xlabel('Time (days)');
+ylabel('ln(I(t))');
+title('Linear Least Squares Fit for ln(I(t))');
+legend;
+grid on;
