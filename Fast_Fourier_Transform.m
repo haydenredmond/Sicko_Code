@@ -1,4 +1,4 @@
-function [Signal , Time] = Fast_Fourier_Transform ( input_Signal , Time)
+function [] = Fast_Fourier_Transform ()
 
 
 
